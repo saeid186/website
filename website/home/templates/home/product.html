@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block title %}
+محصولات
+{% endblock %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'product.css' %}">
+
+<div class="container">
+    <h3 class="h3">shopping Demo-2 </h3>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid2">
+                <div class="product-image2">
+                    <a href="{% url 'home:detail' product.id %}">
+                        <img class="pic-1" src="{{ product.image.url }}">
+                        {% for data in product.product.all %}
+                        {% if forloop.counter == 1 %}
+                        <img class="pic-2" src="{{ data.image.url }}">
+                        {% endif %}
+                        {% endfor %}
+                    </a>
+                    <ul class="social">
+                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                        <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label">Sale</span>
+                    <span class="product-discount-label">50%</span>
+                    <a class="add-to-cart" href="">Add to cart</a>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">{{ product.name }}</a></h3>
+                    <div class="price">{{ product.total_price | intcomma }}
+                        <span>{{ product.unit_price | intcomma }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if products.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.previous_page_number }}">{{ products.previous_page_number }}</a>
+                </li>
+                {% endif %}
+
+                <li class="page-item {% if page_num == page_num %} active {% endif %}">
+                    <a class="page-link" href="?page={{ products.number }}">{{ products.number }}</a>
+                </li>
+
+                {% if products.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.next_page_number }}">{{ products.next_page_number }}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+{% endblock %}

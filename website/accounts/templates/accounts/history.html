@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}history{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="card mt-3 pd-5">
+    {% for i in data %}
+      <h2>name: {{ i.product.name }} &nbsp; {{ i.order.get_price }}</h2>
+      <img src="{{ i.product.image.url }}" style="width: 100px; height: 100px">
+      <h2>address: {{ i.order.address }}</h2>
+      {% if i.order.paid == True %}
+        <p>پرداخت شده</p>
+      {% else %}
+        <p>پرداخت نشده</p>
+      {% endif %}
+      <hr>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

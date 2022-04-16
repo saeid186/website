@@ -1,0 +1,9 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}
+        <h3 class="alert alert-{{ message.tags }}">{{ message }}</h3>
+        {% else %}
+        <h3 class="alert alert-dark" >{{ message }}</h3>
+        {% endif %}
+    {% endfor %}
+{% endif %}

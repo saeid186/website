@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} confirm Password {% endblock %}
+{% block body %}
+<form method="post" action="">
+  {% if validlink %}
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">change password</button>
+  {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}
+محصولات
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3 p-3">
+    <div class="row mt-3 p-3">
+        <form action="{% url 'home:product' %}">
+            {{ form }}
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    {% for data in category %}
+    <a href="{{ data.get_absolute_url }}">{{ data.name }}</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        </button>
+        <ul class="dropdown-menu">
+            {% for info in data.sub.all %}
+            <li><a class="dropdown-item" href="{{ info.get_absolute_url }}">{{ info.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+
+    <div class="row mt-4">
+        <div class="col-3">
+            <form>
+                <label>Price:
+                    <input type="range" name="price_1" min="90000" max="150000">
+                    <input type="range" name="price_2" min="90000" max="150000">
+                </label>
+                <button type="submit" class="btn btn-danger">Filter</button>
+            </form>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-4">
+                    <h1>{{ product.name }}</h1>
+                    <a href="{% url 'home:detail' product.id %}">
+                        {% thumbnail product.image '200x200' as img %}
+                        <img src="{{ img.url }}" style="width: 200px; height: 200px"><br>
+                        {% endthumbnail %}
+                    </a>
+                    {% if product.discount %}
+                    <h4>{{ product.unit_price }}</h4>
+                    <h3>{{ product.total_price }}</h3>
+                    {% else %}
+                    <h3>{{ product.total_price }}</h3>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">{{ products.previous_page_number }}</a>
+            </li>
+            {% endif %}
+
+            <li class="page-item {% if page_num == page_num %} active {% endif %}">
+                <a class="page-link" href="?page={{ products.number }}">{{ products.number }}</a>
+            </li>
+
+            {% if products.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">{{ products.next_page_number }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+            </li>
+            {% endif %}
+
+
+        </ul>
+    </nav>
+
+
+</div>
+
+{% endblock %}

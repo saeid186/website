@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} code register {% endblock %}
+
+{% block body %}
+<h1>Phone Login</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+{% endblock %}
