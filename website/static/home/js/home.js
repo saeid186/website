@@ -1,5 +1,5 @@
 var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 2,
+    slidesPerView: 4,
     spaceBetween: 10,
     freeMode: true,
     pagination: {

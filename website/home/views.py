@@ -2,12 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import SearchForm
-from django.db.models import Q
+from django.db.models import Q, Max
 from cart.models import *
 from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
 from .filters import ProductFilter
 from django.contrib import messages
+from urllib.parse import urlencode
 
 
 def home(request):
@@ -28,15 +29,21 @@ def all_product(request, slug=None, id=None):
     products = filter.qs
     paginator = Paginator(products, 2)
     page_num = request.GET.get('page')
+    data = request.GET.copy()
+    if 'page' in data:
+        del data['page']
+    data = urlencode(data)
     page_obj = paginator.get_page(page_num)
     category = Category.objects.filter(sub_cat=False)
     form = SearchForm()
+    max_price = Product.objects.aggregate(unit_price=Max('unit_price'))
+    max_price = int(max_price['unit_price'])
     if 'search' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
             data = form.cleaned_data['search']
             products = products.filter(Q(name__icontains=data))
-            paginator = Paginator(products, 3)
+            paginator = Paginator(products, 2)
             page_num = request.GET.get('page')
             page_obj = paginator.get_page(page_num)
     if slug and id:
@@ -51,11 +58,14 @@ def all_product(request, slug=None, id=None):
         'form': form,
         'page_num': page_num,
         'filter': filter,
+        'max_price': max_price,
+        'data': data,
     }
     return render(request, 'home/product.html', context)
 
 
 def product_detail(request, id):
+    create = Product.objects.all().order_by('-create')[:6]
     product = get_object_or_404(Product, id=id)
     comment_form = CommentForm()
     comments = Comment.objects.filter(product_id=id, is_reply=False)
@@ -93,8 +103,9 @@ def product_detail(request, id):
             'comment_form': comment_form,
             'comments': comments,
             'reply_form': reply_form,
+            'create': create,
         }
-        return render(request, 'home/detail.html', context)
+        return render(request, 'home/new_detail.html', context)
     else:
         context = {
             'product': product,
@@ -107,8 +118,9 @@ def product_detail(request, id):
             'comment_form': comment_form,
             'comments': comments,
             'reply_form': reply_form,
+            'create': create,
         }
-        return render(request, 'home/detail.html', context)
+        return render(request, 'home/new_detail.html', context)
 
 
 def product_search(request):

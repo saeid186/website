@@ -26,7 +26,7 @@
     </div>
     <div class="carousel-inner myslider">
         {% for i in gallery %}
-        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+            <div class="carousel-item {% if forloop.first %} active {% endif %}">
             <img src="{{ i.image.url }}"  class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>{{ i.name }}</h5>

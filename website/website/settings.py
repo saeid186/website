@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-8%bzq&$(=kz4wcev21rgikyr_=@^!y^yw#qrzuo6yr1l#toh*%
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
-
 
 # Application definition
 
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'django_jalali',
     'django_filters',
     'django.contrib.humanize',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +79,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -122,7 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -134,7 +131,6 @@ TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -153,7 +149,7 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 CKEDITOR_UPLOAD_PATH = 'ck/'
 CKEDITOR_CONFIGS = {
     'default': {
-      'toolbar': 'full'
+        'toolbar': 'full'
     },
 }
 TAGGIT_CASE_INSENSITIVE = True
@@ -167,4 +163,12 @@ EMAIL_HOST_PASSWORD = 'jkvoxvsisyrujaok'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
+# Security section
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 86400
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True

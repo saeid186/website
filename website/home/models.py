@@ -50,6 +50,7 @@ class Product(models.Model):
     total_like = models.PositiveIntegerField(default=0)
     unlike = models.ManyToManyField(User, blank=True, related_name='product_unlike')
     total_unlike = models.PositiveIntegerField(default=0)
+    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -68,6 +69,9 @@ class Product(models.Model):
             total = (self.discount * self.unit_price) / 100
             return int(self.unit_price - total)
         return self.total_price
+
+    def get_absolute_url(self):
+        return reverse('home:detail', args=[self.id])
 
 
 class Size(models.Model):
@@ -124,6 +128,13 @@ class Gallery(models.Model):
         return self.name
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -147,4 +158,3 @@ class ReplyForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['comment']
-

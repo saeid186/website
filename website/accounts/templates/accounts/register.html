@@ -10,6 +10,9 @@ register
 {% endblock %}
 
 {% block body %}
+    <div>
+        <p><a href="tel:/021284201" target=""><span style="color: #1f1f3d"><strong style="font-weight: bold">۰۲۱۲۸۴۲۰۱</strong></span></a></p>
+    </div>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
