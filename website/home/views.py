@@ -15,12 +15,14 @@ def home(request):
     category = Category.objects.filter(sub_cat=False)
     gallery = Gallery.objects.all()
     create = Product.objects.all().order_by('-create')[:6]
+    other = Product.objects.all().order_by('-create')[:12]
     context = {
         'category': category,
         'gallery': gallery,
         'create': create,
+        'other': other,
     }
-    return render(request, 'home/home.html', context)
+    return render(request, 'home/new_home.html', context)
 
 
 def all_product(request, slug=None, id=None):

@@ -1,58 +1,117 @@
 * {
     margin: 0;
     padding: 0;
-    }
+}
 
-    .nav {
-        background: #262626;
-        z-index: 2;
-        display: flex;
-        position: relative;
-        opacity: 0.95;
-    }
+.nav {
+    background: #262626;
+    z-index: 2;
+    display: flex;
+    position: relative;
+    opacity: 0.95;
+}
 
-    .nav ul {
-        list-style: none;
-    }
+.nav ul {
+    list-style: none;
+}
 
-    .nav ul li a {
-        display: block;
-        color: #fff;
-        text-decoration: none;
-    }
+.nav ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
 
-    .nav ul li {
-        background: #262626;
-        width: 100px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        float: left;
-        color: #fff;
-        font-size: 14px;
-        position: relative;
-        font-family: Sans-Serif;
-    }
+.nav ul li {
+    background: #262626;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+    color: #fff;
+    font-size: 14px;
+    position: relative;
+    font-family: Sans-Serif;
+}
 
-    .nav ul li:hover {
-        background: #9bc53d;
-        z-index: 2;
-    }
+.nav ul li:hover {
+    background: #9bc53d;
+    z-index: 2;
+}
 
-    .nav ul ul {
-        display: none;
-    }
+.nav ul ul {
+    display: none;
+}
 
-    .nav ul li:hover > ul {
-        display: block;
-    }
+.nav ul li:hover > ul {
+    display: block;
+}
 
-    .nav ul ul ul:hover > a {
-        display: block;
-    }
+.nav ul ul ul:hover > a {
+    display: block;
+}
 
-    .nav ul ul ul {
-        margin-left: 100px;
-        top: 0;
-        position: absolute;
-    }
+.nav ul ul ul {
+    margin-left: 100px;
+    top: 0;
+    position: absolute;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Bold.eot');
+    src: url('Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+    url('Vazir-Bold.woff2') format('woff2'),
+    url('Vazir-Bold.woff') format('woff'),
+    url('Vazir-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Black.eot');
+    src: url('Vazir-Black.eot?#iefix') format('embedded-opentype'),
+    url('Vazir-Black.woff2') format('woff2'),
+    url('Vazir-Black.woff') format('woff'),
+    url('Vazir-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Medium.eot');
+    src: url('Vazir-Medium.eot?#iefix') format('embedded-opentype'),
+    url('Vazir-Medium.woff2') format('woff2'),
+    url('Vazir-Medium.woff') format('woff'),
+    url('Vazir-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Light.eot');
+    src: url('Vazir-Light.eot?#iefix') format('embedded-opentype'),
+    url('Vazir-Light.woff2') format('woff2'),
+    url('Vazir-Light.woff') format('woff'),
+    url('Vazir-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Thin.eot');
+    src: url('Vazir-Thin.eot?#iefix') format('embedded-opentype'),
+    url('Vazir-Thin.woff2') format('woff2'),
+    url('Vazir-Thin.woff') format('woff'),
+    url('Vazir-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+body {
+    font-family: "Vazir" !important;
+}

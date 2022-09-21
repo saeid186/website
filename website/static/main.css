@@ -1,0 +1,24 @@
+.image-border{
+    border-radius: 10px;
+}
+.card-border{
+    border-radius: 20px;
+}
+
+.image-thumbnail{
+    width: 100px;
+    height: 100px;
+}
+
+-justify-center{
+
+}
+
+.-bg-color{
+    background-color: #f3eded;
+}
+
+.-a-tag {
+  text-decoration: none !important;
+    color: #212529;
+}

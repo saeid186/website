@@ -1,30 +1,51 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'nav.css' %}">
-<div class="nav">
-    <div class="container">
-        <ul>
-            <li><a href="{% url 'home:home' %}"><i class="fa fa-home"></i></a></li>
-            <li><a href="{% url 'home:product' %}">Product</a></li>
-            <li><a href="{% url 'cart:cart_detail' %}">Cart</a></li>
-            <li>Category
-                <ul>
-                    {% for cat in category %}
-                    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-                        {% for data in cat.sub.all %}
-                        <ul>
-                            <li><a href="{{ data.get_absolute_url }}">{{ data.name }}</a></li>
-                        </ul>
-                        {% endfor %}
+{% block css %}
+{% endblock %}
+
+<header class="shadow">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Sevenet.ir</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex float-sm-right" action="{% url 'home:product' %}">
+                    <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success" type="submit" value="search">جستجو</button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">صفحه اصلی</a>
                     </li>
-                    {% endfor %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            محصولات
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for cat in category %}
+                            <li><a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                            {% for data in cat.sub.all %}
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ data.get_absolute_url }}">{{ data.name }}</a></li>
+                            </ul>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">تماس با ما</a>
+                    </li>
                 </ul>
-            </li>
-        </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
-        <form class="form-inline float-sm-right" action="{% url 'home:product' %}">
-            <input class="form-control" type="search" placeholder="Search" name="search">
-            <input type="submit" value="search" class="btn btn-danger">
-        </form>
-
-    </div>
-</div>

@@ -1,0 +1,34 @@
+{% load static %}
+
+<header class="shadow">
+    <div class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="{% url 'home:home' %}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{% url 'home:product' %}">Product</a></li>
+                <li><a href="{% url 'cart:cart_detail' %}">Cart</a></li>
+                <li>Category
+                    <ul>
+                        {% for cat in category %}
+                        <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                            {% for data in cat.sub.all %}
+                            <ul>
+                                <li><a href="{{ data.get_absolute_url }}">{{ data.name }}</a></li>
+                            </ul>
+                            {% endfor %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="form-inline float-sm-right" action="{% url 'home:product' %}">
+                <input class="form-control" type="search" placeholder="Search" name="search">
+                <input type="submit" value="search" class="btn btn-danger">
+            </form>
+
+        </div>
+    </div>
+
+</header>
+
