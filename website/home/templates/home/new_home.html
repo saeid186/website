@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}فروشگاه{% endblock %}
+{% block title %}فروشگاه اینترنی Sevenet{% endblock %}
 {% load static %}
 {% load humanize %}
 
 {% block body %}
 
 <section>
-    <div class="container bg-light align-items-center p-0">
-        <div class="row justify-content-center mt-5">
+    <div class="container -background-color align-items-center p-0 mt-5">
+        <div class="row justify-content-center">
             <div class="col-10">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {% for i in gallery %}
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                            <img src="{{ i.image.url }}" class="d-block w-100 image-border" alt="...">
+                            <img src="{{ i.image.url }}" class="d-block w-100 -image-border" alt="...">
                         </div>
                         {% endfor %}
                     </div>
@@ -33,36 +33,57 @@
     </div>
 </section>
 
+<!--<section class="container -bg-color p-0">-->
+<!--    <div>-->
+<!--        <div class="row g-4 px-2">-->
+<!--            <p>تازه ترین ها</p>-->
+<!--        </div>-->
+<!--        <hr/>-->
+<!--        <div class="row g-4">-->
+<!--            {% for i in create %}-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card card-border -background-color text-center mb-5">-->
+<!--                    <div class="card-body">-->
+<!--                        <img src="{{ i.image.url }}" class="-image-thumbnail -image-border" alt="">-->
+<!--                        <p class="card-title mt-4 fw-bold">{{ i.name }}</p>-->
+<!--                        <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>-->
+<!--                        <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--New product-->
 <section class="container px-0 mt-5">
     <div style="height: 150px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-                  style="stroke: none; fill: #f3eded;"></path>
+                  style="stroke: none; fill: #F1F4F9;"></path>
         </svg>
     </div>
 </section>
 
 <section class="container -bg-color p-0">
-    <div>
-        <div class="row g-4 px-2">
-            <p>تازه ترین ها</p>
-        </div>
-        <hr/>
-        <div class="row g-4">
-            {% for i in create %}
-            <div class="col-md-2">
-                <div class="card card-border text-center mb-5">
-                    <div class="card-body">
-                        <img src="{{ i.image.url }}" class="card-img-top image-border shadow image-thumbnail"
-                             alt="">
-                        <p class="card-title mt-4 fw-bold">{{ i.name }}</p>
-                        <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>
-                        <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>
-                    </div>
+    <div class="row g-4 px-2">
+        <p>تازه ترین ها</p>
+    </div>
+    <hr/>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+        {% for i in create %}
+        <div class="col mb-5">
+            <div class="card card-border -background-color text-center mb-5 h-100">
+                <div class="card-body">
+                    <img src="{{ i.image.url }}" class="-image-thumbnail -image-border" alt="">
+                    <p class="card-title mt-4 fw-bold">{{ i.name }}</p>
+                    <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>
+                    <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </section>
 
@@ -70,51 +91,49 @@
     <div style="height: 150px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"
-                  style="stroke: none; fill: #f3eded;"></path>
+                  style="stroke: none; fill: #F1F4F9;"></path>
         </svg>
     </div>
 </section>
 
-
-<section class="container px-0">
+<section class="container px-0 mt-5">
     <div style="height: 150px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
-                  style="stroke: none; fill: #f3eded;"></path>
+                  style="stroke: none; fill: #F1F4F9;"></path>
         </svg>
     </div>
 </section>
 
+<!--Other product-->
 <section class="container -bg-color p-0">
-        <div class="row g-4 px-2">
-            <p>سایر محصولات</p>
-        </div>
-        <hr/>
-        <div class="row g-4">
-            {% for i in other %}
-            <div class="col-md-2">
-                <div class="card card-border text-center mb-5">
-                    <div class="card-body">
-                        <img src="{{ i.image.url }}" class="card-img-top image-border shadow image-thumbnail"
-                             alt="">
-                        <p class="card-title mt-4 fw-bold">{{ i.name }}</p>
-                        <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>
-                        <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>
-                    </div>
+    <div class="row g-4 px-2">
+        <p>سایر محصولات</p>
+    </div>
+    <hr/>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+        {% for i in other %}
+        <div class="col mb-5">
+            <div class="card card-border -background-color text-center mb-5 h-100">
+                <div class="card-body">
+                    <img src="{{ i.image.url }}" class="-image-thumbnail -image-border" alt="">
+                    <p class="card-title mt-4 fw-bold">{{ i.name }}</p>
+                    <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>
+                    <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
+    </div>
 </section>
 
 <section class="container px-0 mb-5">
     <div style="height: 150px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
             <path d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"
-                  style="stroke: none; fill: #f3eded;"></path>
+                  style="stroke: none; fill: #F1F4F9;"></path>
         </svg>
     </div>
 </section>
-
 
 {% endblock %}

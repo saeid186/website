@@ -7,111 +7,155 @@
 {% block body %}
 <link rel="stylesheet" href="{% static 'product.css' %}">
 
-<div class="container">
-    <h3 class="h3">shopping Demo-2 </h3>
-    <div class="row">
-        <div class="row">
-            <div class="col-3">
-                <form>
-                    <input type="submit" name="price" value="گرانترین">
-                    <input type="submit" name="price" value="ارزانترین">
-                    <input type="submit" name="create" value="جدیدترین">
-                    <input type="submit" name="discount" value="بیشترین تخفیف">
-                    <div style="display: none">
-                        <input type="range" name="price_1" min="0" value="0">
-                        <input type="range" name="price_2" min="90000" max={{ max_price }} value="{{ max_price }}">
-                        <label>Brand:
-                            {{ filter.form.brand }}
-                        </label>
-                        <br>
-                        <button type="submit" class="btn btn-danger">Filter</button>
-                    </div>
-                </form>
+<!--<div class="container">-->
+<!--    <h3 class="h3">shopping Demo-2 </h3>-->
+<!--    <div class="row">-->
+<!--        <div class="row">-->
+<!--            <div class="col-3">-->
+<!--                <form>-->
+<!--                    <input type="submit" name="price" value="گرانترین">-->
+<!--                    <input type="submit" name="price" value="ارزانترین">-->
+<!--                    <input type="submit" name="create" value="جدیدترین">-->
+<!--                    <input type="submit" name="discount" value="بیشترین تخفیف">-->
+<!--                    <div style="display: none">-->
+<!--                        <input type="range" name="price_1" min="0" value="0">-->
+<!--                        <input type="range" name="price_2" min="90000" max={{ max_price }} value="{{ max_price }}">-->
+<!--                        <label>Brand:-->
+<!--                            {{ filter.form.brand }}-->
+<!--                        </label>-->
+<!--                        <br>-->
+<!--                        <button type="submit" class="btn btn-danger">Filter</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-3">-->
+<!--            <form>-->
+<!--                <label>Price:-->
+<!--                    <input type="range" name="price_1" min="0" value="0">-->
+<!--                    <input type="range" name="price_2" min="90000" max={{ max_price }} value="{{ max_price }}">-->
+<!--                </label>-->
+<!--                <div style="display: none">-->
+<!--                    <input type="submit" name="price" value="گرانترین">-->
+<!--                    <input type="submit" name="price" value="ارزانترین">-->
+<!--                    <input type="submit" name="create" value="جدیدترین">-->
+<!--                    <input type="submit" name="discount" value="بیشترین تخفیف">-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <label>Brand:-->
+<!--                    {{ filter.form.brand }}-->
+<!--                </label>-->
+<!--                <br>-->
+<!--                <button type="submit" class="btn btn-danger">Filter</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="col-9">-->
+<!--            {% for product in products %}-->
+<!--            <div class="col-md-3 col-sm-6">-->
+<!--                <div class="product-grid2">-->
+<!--                    <div class="product-image2">-->
+<!--                        <a href="{% url 'home:detail' product.id %}">-->
+<!--                            <img class="pic-1" src="{{ product.image.url }}">-->
+<!--                            {% for data in product.product.all %}-->
+<!--                            {% if forloop.counter == 1 %}-->
+<!--                            <img class="pic-2" src="{{ data.image.url }}">-->
+<!--                            {% endif %}-->
+<!--                            {% endfor %}-->
+<!--                        </a>-->
+<!--                        <ul class="social">-->
+<!--                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>-->
+<!--                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>-->
+<!--                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>-->
+<!--                        </ul>-->
+<!--                        <span class="product-new-label">Sale</span>-->
+<!--                        <span class="product-discount-label">50%</span>-->
+<!--                        <a class="add-to-cart" href="">Add to cart</a>-->
+<!--                    </div>-->
+<!--                    <div class="product-content">-->
+<!--                        <h3 class="title"><a href="#">{{ product.name }}</a></h3>-->
+<!--                        <div class="price">{{ product.total_price | intcomma }}-->
+<!--                            <span>{{ product.unit_price | intcomma }}</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <nav aria-label="Page navigation example">-->
+<!--            <ul class="pagination">-->
+<!--                {% if products.has_previous %}-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="{% filter_url products.previous_page_number 'page' request.GET.urlencode %}">Previous</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="{% filter_url products.previous_page_number 'page' request.GET.urlencode %}">{{ products.previous_page_number }}</a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+
+<!--                <li class="page-item {% if page_num == page_num %} active {% endif %}">-->
+<!--                    <a class="page-link" href="{% filter_url products.number 'page' request.GET.urlencode %}">{{ products.number }}</a>-->
+<!--                </li>-->
+
+<!--                {% if products.has_next %}-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="{% filter_url products.next_page_number 'page' request.GET.urlencode %}">{{ products.next_page_number }}</a>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="{% filter_url products.next_page_number 'page' request.GET.urlencode %}">Next</a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<section class="container px-0 mt-5">
+    <div style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: #F1F4F9;"></path>
+        </svg>
+    </div>
+</section>
+
+<section class="container -bg-color p-0">
+    <div class="row g-4 px-2">
+        <p class="fs-3 text-center">{{ slug }}</p>
+    </div>
+    {% if products %}
+    <hr/>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+        {% for i in products %}
+        <div class="col mb-5">
+            <div class="card card-border -background-color text-center mb-5 h-100">
+                <div class="card-body">
+                    <img src="{{ i.image.url }}" class="-image-thumbnail -image-border" alt="">
+                    <p class="card-title mt-4 fw-bold">{{ i.name }}</p>
+                    <p class="card-text mt-3 text-muted">{{ i.total_price | intcomma }} تومان </p>
+                    <a href="{% url 'home:detail' i.id %}" class="stretched-link"></a>
+                </div>
             </div>
         </div>
-        <div class="col-3">
-            <form>
-                <label>Price:
-                    <input type="range" name="price_1" min="0" value="0">
-                    <input type="range" name="price_2" min="90000" max={{ max_price }} value="{{ max_price }}">
-                </label>
-                <div style="display: none">
-                    <input type="submit" name="price" value="گرانترین">
-                    <input type="submit" name="price" value="ارزانترین">
-                    <input type="submit" name="create" value="جدیدترین">
-                    <input type="submit" name="discount" value="بیشترین تخفیف">
-                </div>
-                <br>
-                <label>Brand:
-                    {{ filter.form.brand }}
-                </label>
-                <br>
-                <button type="submit" class="btn btn-danger">Filter</button>
-            </form>
-        </div>
-        <br>
-        <div class="col-9">
-            {% for product in products %}
-            <div class="col-md-3 col-sm-6">
-                <div class="product-grid2">
-                    <div class="product-image2">
-                        <a href="{% url 'home:detail' product.id %}">
-                            <img class="pic-1" src="{{ product.image.url }}">
-                            {% for data in product.product.all %}
-                            {% if forloop.counter == 1 %}
-                            <img class="pic-2" src="{{ data.image.url }}">
-                            {% endif %}
-                            {% endfor %}
-                        </a>
-                        <ul class="social">
-                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                        <span class="product-new-label">Sale</span>
-                        <span class="product-discount-label">50%</span>
-                        <a class="add-to-cart" href="">Add to cart</a>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">{{ product.name }}</a></h3>
-                        <div class="price">{{ product.total_price | intcomma }}
-                            <span>{{ product.unit_price | intcomma }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
+    {% else %}
+    <p>نتیجه ای یافت نشد</p>
+    {% endif %}
+</section>
 
-    <div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                {% if products.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="{% filter_url products.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{% filter_url products.previous_page_number 'page' request.GET.urlencode %}">{{ products.previous_page_number }}</a>
-                </li>
-                {% endif %}
-
-                <li class="page-item {% if page_num == page_num %} active {% endif %}">
-                    <a class="page-link" href="{% filter_url products.number 'page' request.GET.urlencode %}">{{ products.number }}</a>
-                </li>
-
-                {% if products.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="{% filter_url products.next_page_number 'page' request.GET.urlencode %}">{{ products.next_page_number }}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{% filter_url products.next_page_number 'page' request.GET.urlencode %}">Next</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
+<section class="container px-0">
+    <div style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <path d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"
+                  style="stroke: none; fill: #F1F4F9;"></path>
+        </svg>
     </div>
+</section>
 
-</div>
 
 {% endblock %}

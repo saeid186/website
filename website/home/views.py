@@ -15,7 +15,7 @@ def home(request):
     category = Category.objects.filter(sub_cat=False)
     gallery = Gallery.objects.all()
     create = Product.objects.all().order_by('-create')[:6]
-    other = Product.objects.all().order_by('-create')[:12]
+    other = Product.objects.all().order_by('-create')[:10]
     context = {
         'category': category,
         'gallery': gallery,
@@ -42,12 +42,14 @@ def all_product(request, slug=None, id=None):
     max_price = int(max_price['unit_price'])
     if 'search' in request.GET:
         form = SearchForm(request.GET)
+        print(form)
         if form.is_valid():
             data = form.cleaned_data['search']
             products = products.filter(Q(name__icontains=data))
             paginator = Paginator(products, 2)
             page_num = request.GET.get('page')
             page_obj = paginator.get_page(page_num)
+            slug = f"نتایج بر اساس '{data}'"
     if slug and id:
         data = get_object_or_404(Category, slug=slug, id=id)
         products = products.filter(category=data)
@@ -62,18 +64,20 @@ def all_product(request, slug=None, id=None):
         'filter': filter,
         'max_price': max_price,
         'data': data,
+        'slug': slug
     }
     return render(request, 'home/product.html', context)
 
 
 def product_detail(request, id):
+    category = Category.objects.filter(sub_cat=False)
     create = Product.objects.all().order_by('-create')[:6]
     product = get_object_or_404(Product, id=id)
     comment_form = CommentForm()
     comments = Comment.objects.filter(product_id=id, is_reply=False)
     reply_form = ReplyForm()
-    similar = product.tags.similar_objects()[:2]
-    images = Images.objects.filter(product_id=id)
+    similar = product.tags.similar_objects()[:7]
+    images = Images.objects.filter(product_id=id).order_by('-id')[:4]
     cart_form = CartForm()
     is_like = False
     if product.like.filter(id=request.user.id).exists():
@@ -93,6 +97,7 @@ def product_detail(request, id):
             variant = Variants.objects.filter(product_variant_id=id)
             variants = Variants.objects.get(id=variant[0].id)
         context = {
+            'category': category,
             'product': product,
             'variant': variant,
             'variants': variants,
@@ -110,6 +115,7 @@ def product_detail(request, id):
         return render(request, 'home/new_detail.html', context)
     else:
         context = {
+            'category': category,
             'product': product,
             'similar': similar,
             'images': images,
@@ -131,15 +137,18 @@ def product_search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data['search']
-            if data.isdigit():
-                products = products.filter(Q(discount__exact=data) | Q(unit_price__exact=data))
-            else:
-                products = products.filter(name__icontains=data)
+            if data:
+                if data.isdigit():
+                    products = products.filter(Q(discount__exact=data) | Q(unit_price__exact=data))
+                else:
+                    products = products.filter(name__icontains=data)
                 context = {
                     'products': products,
                     'form': form,
                 }
-            return render(request, 'home/product.html', context)
+                return render(request, 'home/product.html', context)
+            else:
+                return render(request, 'home/home.html')
 
 
 def favourite_product(request, id):

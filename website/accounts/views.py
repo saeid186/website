@@ -81,10 +81,10 @@ def user_login(request):
                 user = authenticate(request, username=data['user'], password=data['password'])
             if user is not None:
                 login(request, user)
-                messages.success(request, "Login Successfully", "primary")
+                messages.success(request, "با موفقیت وارد شدید.", "primary")
                 return redirect('home:home')
             else:
-                messages.error(request, "username or password is wrong", "danger")
+                messages.error(request, "نام کاربری یا کلمه عبور صحیح نیست.", "danger")
                 return redirect('accounts:login')
 
     elif request.method == 'GET':

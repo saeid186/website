@@ -5,6 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django_jalali.db import models as jmodels
 from django.forms import ModelForm
+from django_resized import ResizedImageField
 
 
 class Category(models.Model):
@@ -39,12 +40,14 @@ class Product(models.Model):
     discount = models.PositiveIntegerField(blank=True, null=True)
     total_price = models.PositiveIntegerField()
     information = RichTextUploadingField(blank=True, null=True)
+    Specifications = RichTextUploadingField(blank=True, null=True)
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     tags = TaggableManager(blank=True)
     available = models.BooleanField(default=True)
     status = models.CharField(max_length=200, blank=True, null=True, choices=VARIANT)
-    image = models.ImageField(upload_to='product')
+    # image = models.ImageField(upload_to='product')
+    image = ResizedImageField(size=[700, 700], crop=['middle', 'center'], upload_to='product', blank=True)
     favourite = models.ManyToManyField(User, blank=True, related_name='fa_user')
     like = models.ManyToManyField(User, blank=True, related_name='product_like')
     total_like = models.PositiveIntegerField(default=0)
