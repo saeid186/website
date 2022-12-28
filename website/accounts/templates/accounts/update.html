@@ -5,11 +5,18 @@ update
 {% endblock %}
 
 {% block body %}
-<p>Update Profile</p>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Update</button>
-    </form>
+<section>
+    <div class="container -background-color align-items-center p-0 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            <div class="col-6">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    {{ profile_form.as_p }}
+                    <button type="submit">بروزرسانی</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
