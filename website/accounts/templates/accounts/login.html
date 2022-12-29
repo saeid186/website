@@ -5,14 +5,20 @@ login
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="text" name="user" placeholder="Insert username"><br><br>
-        <input type="password" name="password" placeholder="Insert password"><br><br>
-        <button type="submit">login</button>
-    </form>
-    <br>
-    <a href="{% url 'accounts:reset' %}">فراموشی رمز عبور</a>
-</div>
-{% endblock %}
+<section>
+    <div class="container -background-color align-items-center p-0 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            <div class="col mb-5">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="user" class="form-control me-2" placeholder="نام کاربری"><br><br>
+                    <input type="password" name="password" class="form-control me-2" placeholder="کلمه عبور"><br><br>
+                    <button type="submit" class="btn -btn-outline-color mr-2 px-4 align-items-center">ورود</button>
+                </form>
+                <br>
+                <a href="{% url 'accounts:reset' %}">فراموشی رمز عبور</a>
+            </div>
+        </div>
+    </div>
+</section>
+                {% endblock %}

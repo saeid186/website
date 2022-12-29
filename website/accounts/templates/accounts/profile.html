@@ -5,38 +5,39 @@ profile
 {% endblock %}
 
 {% block body %}
-<div class="container" mt-5>
-    <div class="row">
-        <div class="col-6">
-            <h1>profile</h1>
-            <table>
-                <tr>
-                    <th>user: {{ profile.user.username }}</th>
-                </tr>
-                <tr>
-                    <th>name: {{ profile.user.first_name }}</th>
-                </tr>
-                <tr>
-                    <th>last name: {{ profile.user.last_name }}</th>
-                </tr>
-                <tr>
-                    <th>phone: {{ profile.phone }}</th>
-                </tr>
-                <tr>
-                    <th>email: {{ profile.user.email }}</th>
-                </tr>
-                <tr>
-                    <th>address: {{ profile.address }}</th>
-                </tr>
-            </table>
-            <a href="{% url 'accounts:update' %}">update</a>
-            <a href="{% url 'accounts:change' %}">ChangePassword</a>
-        </div>
-        <div class="col-6">
-            <img src="{{ profile.profile_image.url }}" style="width: 300px;height: 200px">
+<section>
+    <div class="container -background-color align-items-center p-0 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            <div class="col mb-5">
+                <table>
+                    <tr>
+                        <th>نام کاربری : {{ profile.user.username }}</th>
+                    </tr>
+                    <tr>
+                        <th>نام : {{ profile.user.first_name }}</th>
+                    </tr>
+                    <tr>
+                        <th>نام خانوادگی : {{ profile.user.last_name }}</th>
+                    </tr>
+                    <tr>
+                        <th>تلفن : {{ profile.phone }}</th>
+                    </tr>
+                    <tr>
+                        <th>آدرس ایمیل : {{ profile.user.email }}</th>
+                    </tr>
+                    <tr>
+                        <th>آدرس : {{ profile.address }}</th>
+                    </tr>
+                </table>
+                <a href="{% url 'accounts:update' %}">تغییر اطلاعات</a>
+                <a href="{% url 'accounts:change' %}">تغییر کلمه عبور</a>
+            </div>
+            <div class="col-6">
+                <img src="{{ profile.profile_image.url }}" style="width: 300px;height: 200px">
+            </div>
+
         </div>
 
     </div>
-
-</div>
+</section>
 {% endblock %}
